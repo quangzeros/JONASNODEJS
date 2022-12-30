@@ -7,6 +7,7 @@ const xss = require("xss-clean");
 const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -62,6 +63,8 @@ app.use(hpp({
     'difficulty'
 ]
 }));
+
+app.use(compression());
 
 app.use((req,res,next)=>{
     // console.log(req.cookies)
