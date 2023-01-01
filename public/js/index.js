@@ -5,11 +5,11 @@ const hideAlert = ()=>{
     if(el) el.parentElement.removeChild(el);
 }
 
-const showAlert = (type,msg) =>{
+const showAlert = (type,msg,time = 5) =>{
     hideAlert();
     const markup = `<div class ="alert alert--${type}">${msg}</div>`;
     document.querySelector('body').insertAdjacentHTML('afterbegin',markup);
-    window.setTimeout(hideAlert,5000)
+    window.setTimeout(hideAlert,time*1000)
 }
 
 //Login Function
@@ -191,3 +191,5 @@ if(bookBtn){
     })
 }
 
+const alertMessage = document.querySelector('body').dataset.alert
+if(alert) showAlert('success', alertMessage,20)
