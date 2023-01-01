@@ -6,7 +6,7 @@ const authController = require('./../controller/authController');
 
 bookingRouter.use(authController.protect)
 
-bookingRouter.get('/checkout-session/:tourId/:startAt',
+bookingRouter.get('/checkout-session/:tourId',
 bookingController.getCheckoutSession)
 
 bookingRouter.use(authController.restrictTo('admin','lead-guide'))
