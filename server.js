@@ -8,6 +8,8 @@ process.on('uncaughtException',(err)=>{
 // function request it will go to Error Handler funtion
 const app = require('./app');
 
+app.enable('trust proxy')
+
 
 dotenv.config({path:'./config.env'})
 
