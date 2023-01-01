@@ -80,10 +80,6 @@ block content
             .cta__content
                 h2.heading-secondary What are you waiting for?
                 p.cta__text=`${tour.duration} days. 1 adventure. Infinite memories. Make it yours today!`
-                select(name="startDate" id="startDate")
-                        option(value=`none`) Select your date of tour
-                        each date in tour.startDatesTest
-                            option(value=`${date.startDates}-${date.participant}/${tour.maxGroupSize}` )=date.startDates
                 if user
                     button.btn.btn--green.span-all-rows#book-tour(data-tour-id=`${tour.id}`) Book tour now!
                 else
