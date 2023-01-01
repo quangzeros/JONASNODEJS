@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors')
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -21,6 +22,18 @@ const app = express();
 app.set('view engine', 'pug');
 
 app.set('views', path.join(__dirname,'views'))
+
+//Access-Control-Allow-Origin *
+app.use(cors());// Allow all Domain to access 
+//(this only have 2 type of requests: GET and POST)
+//api.natours.com  -> allow Front-END natours.com can access API
+// we use app.use(cors(
+//  origin :'https://www.natours.com'
+//))
+
+app.options('*',cors());// only all Routes to be use COMPLEX REQUEST
+//app.options('api/v1/tour/:id',cors()) =>Ony allow 'api/v1/tour' can be used COMPLEX REQUEST  such as DELETE, PATCH,PUT....
+
 
 //Serving static files
 app.use(express.static(path.join(__dirname,'public')))
