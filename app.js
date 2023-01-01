@@ -7,6 +7,7 @@ const xss = require("xss-clean");
 const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const bodyParse =require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 
@@ -52,12 +53,12 @@ const limiter  = rateLimit({
 
 app.use('/api',limiter);
 
-app.post('/webhook-checkout',express.raw({type:'application/json'}) ,bookingController.webhookCheckout)
 // Hello world
 // Middleware
 if(process.env.NODE_ENV = 'development'){
     app.use(morgan('dev'));
 }
+app.post('/webhook-checkout',bodyParse.raw({type:'application/json'}) ,bookingController.webhookCheckout)
 //Body parser, reading data from body into req.body
 app.use(express.json({limit: '10kb'}));
 app.use(express.urlencoded({extended:true,limit:'10kb'}))
