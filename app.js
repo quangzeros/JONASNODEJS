@@ -8,13 +8,15 @@ const hpp = require('hpp');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
-const cors = require('cors')
+const cors = require('cors');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const bookingController = require('./controller/bookingController');
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController')
 const app = express();
@@ -50,6 +52,7 @@ const limiter  = rateLimit({
 
 app.use('/api',limiter);
 
+app.post('/webhook-checkout',express.raw({type:'application/json'}) ,bookingController.webhookCheckout)
 // Hello world
 // Middleware
 if(process.env.NODE_ENV = 'development'){
